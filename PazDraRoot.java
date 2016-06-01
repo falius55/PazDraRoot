@@ -12,7 +12,6 @@ import java.util.*;
 // w  41 42 43 44 45 46  w
 // w  w  w  w  w  w  w   w
 // 
-// 最初にコンストラクタで要素の位置をテーブルとして別配列に保持するのもあり
 // 全アクセス方法は、
 // for(int i=1;i<=HEIGHT;i++){
 // int start = (WIDTH+2)*i+1;
@@ -76,11 +75,6 @@ public class PazDraRoot {
 		return new PazDraRoot().setCurrentDropList(charArray);
 	}
 	private PazDraRoot setCurrentDropList(char[] charArray) throws IllegalArgumentException,NullPointerException {
-		// ArraysがNullpointerexceptionをスローする
-		//if (charArray == null) {
-		//	throw new NullPointerException();
-		//}
-		
 		//currentDropList = charArray;
 		//防御的コピー
 		currentDropList = Arrays.copyOf(charArray,(WIDTH+2)*(HEIGHT+2));
@@ -174,14 +168,6 @@ public class PazDraRoot {
 			}
 		}
 		b = null;
-		// Full Print
-		// System.out.println(c);
-		// for (int i=0; i<(WIDTH+2)*(HEIGHT+2); i++) {
-		// 	System.out.print(c[i]);
-		// 	if (i%(WIDTH+2)==WIDTH+1) {
-		// 		System.out.println("");
-		// 	}
-		// }
 		return c;
 	}
 
@@ -289,17 +275,16 @@ public class PazDraRoot {
 		else return maxCombo;
 	}
 
-	/**
-	 * 全ルートを探索する再帰関数です
-	 * @param firstPos このルートの第一手がどこから始まったのかを示す位置番号です。
-	 * @param pos このルートがどこで終わっているのかを示す位置番号です。
-	 * @param dropList 現在のドロップ状況をWIDTH*HEIGHT(さらに外周をwallで囲んでいる)で表している文字配列です。
-	 * @param rooted 現在までの道筋を表す文字配列です。
-	 * @param deep 現在まで何手進んでいるかを表す数値です。
-	 * @param chRoot 最後に進んだ方向を表す文字です。
-	 * @return 現在のルートで終わった場合のコンボ数を返します。
-	 */
+
 	private int recSerch(int firstPos,int pos,char[] dropList,char[] rooted,int deep,char chRoot){
+		//	全ルートを探索する再帰関数
+		//	 firstPos このルートの第一手がどこから始まったのかを示す位置番号です。
+		//	 pos このルートがどこで終わっているのかを示す位置番号です。
+		//	 dropList 現在のドロップ状況をWIDTH*HEIGHT(さらに外周をwallで囲んでいる)で表している文字配列です。
+		//	 rooted 現在までの道筋を表す文字配列です。
+		//	 deep 現在まで何手進んでいるかを表す数値です。
+		//	 chRoot 最後に進んだ方向を表す文字です。
+		//	 現在のルートで終わった場合のコンボ数を返します。
 		if(dropList[pos] == wall) return 0;
 		if(deep>maxDeep) return 0;
 		char[] currentRoot = Arrays.copyOf(rooted,rooted.length);
